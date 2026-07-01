@@ -1,3 +1,6 @@
+import type { EstadoPedido } from "./EstadoPedido";
+import type { FormaPago } from "./FormaPago";
+
 export interface OrderProductCategory {
   id: number;
   nombre: string;
@@ -33,9 +36,9 @@ export interface OrderUser {
 export interface Order {
   id: number;
   fecha: string;
-  estado: string;
+  estado: EstadoPedido;
   total: number;
-  formaPago: string;
+  formaPago: FormaPago;
   detalles: OrderDetail[];
   usuarioDto: OrderUser;
 }
