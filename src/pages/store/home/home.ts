@@ -1,4 +1,6 @@
 import { PRODUCTS, getCategories } from "../../../data/data";
+import type { ICategoria } from "../../../types/categoria";
+import type { CartItem } from "../../../types/product";
 import { logout } from "../../../utils/auth";
 
 const productsContainer = document.getElementById("products");
@@ -34,7 +36,7 @@ sortProductsSelect?.addEventListener("change", () => {
   renderProducts(getFilteredProducts());
 });
 
-function renderCategories() {
+function renderCategories(): void {
   if (!categoriesContainer) {
     return;
   }
@@ -67,7 +69,7 @@ function renderCategories() {
   });
 }
 
-function setActiveCategoryButton(activeButton: HTMLButtonElement) {
+function setActiveCategoryButton(activeButton: HTMLButtonElement): void {
   const buttons = categoriesContainer?.querySelectorAll("button");
 
   buttons?.forEach((button) => {
@@ -77,7 +79,10 @@ function setActiveCategoryButton(activeButton: HTMLButtonElement) {
   activeButton.classList.add("active");
 }
 
-function getFilteredProducts() {
+/**
+ * Aplica búsqueda, categoría seleccionada y ordenamiento sobre los productos.
+ */
+function getFilteredProducts(): typeof PRODUCTS {
   const searchText = searchInput?.value.toLowerCase().trim() || "";
   const sortValue = sortProductsSelect?.value || "DEFAULT";
 
@@ -117,7 +122,7 @@ function getFilteredProducts() {
   return filteredProducts;
 }
 
-function renderProducts(products: typeof PRODUCTS) {
+function renderProducts(products: typeof PRODUCTS): void {
   if (!productsContainer) {
     return;
   }
@@ -194,7 +199,10 @@ function renderProducts(products: typeof PRODUCTS) {
   });
 }
 
-function addToCart(id: number) {
+/**
+ * Agrega un producto al carrito o incrementa su cantidad si ya existe.
+ */
+function addToCart(id: number): void {
   const cart = getCart();
 
   const existing = cart.find((item) => item.id === id);
@@ -212,13 +220,13 @@ function addToCart(id: number) {
   showCartToast();
 }
 
-function getCart(): { id: number; cantidad: number }[] {
+function getCart(): CartItem[] {
   const storedCart = localStorage.getItem("cart");
 
-  return storedCart ? JSON.parse(storedCart) : [];
+  return storedCart ? (JSON.parse(storedCart) as CartItem[]) : [];
 }
 
-function updateCartCount() {
+function updateCartCount(): void {
   if (!cartCount) {
     return;
   }
@@ -230,7 +238,7 @@ function updateCartCount() {
   cartCount.textContent = String(totalItems);
 }
 
-function showCartToast() {
+function showCartToast(): void {
   if (!cartToast) {
     return;
   }
@@ -242,7 +250,7 @@ function showCartToast() {
   }, 2000);
 }
 
-function updateProductsCount(quantity: number) {
+function updateProductsCount(quantity: number): void {
   if (!productsCount) {
     return;
   }
@@ -253,13 +261,13 @@ function updateProductsCount(quantity: number) {
       : `${quantity} productos encontrados`;
 }
 
-function formatPrice(price: number) {
+function formatPrice(price: number): string {
   return `$${price.toLocaleString("es-AR", {
     minimumFractionDigits: 0,
   })}`;
 }
 
-function getStockText(stock: number) {
+function getStockText(stock: number): string {
   if (stock <= 0) {
     return "Producto agotado";
   }
@@ -271,31 +279,35 @@ function getStockText(stock: number) {
   return `Stock: ${stock}`;
 }
 
-function getStoredCategories() {
+function getStoredCategories(): ICategoria[] {
   const storedCategories = localStorage.getItem("adminCategories");
-  return storedCategories ? JSON.parse(storedCategories) : [];
+  return storedCategories ? (JSON.parse(storedCategories) as ICategoria[]) : [];
 }
 
-function getAllCategories() {
-  const dataCategories = getCategories();
+/**
+ * Une las categorías originales del JSON con las editadas o creadas
+ * desde el panel administrador, priorizando los datos de LocalStorage.
+ */
+function getAllCategories(): ICategoria[] {
+  const dataCategories = getCategories() as ICategoria[];
   const storedCategories = getStoredCategories();
 
-  const mergedCategories = dataCategories.map((dataCategory: any) => {
+  const mergedCategories = dataCategories.map((dataCategory) => {
     const editedCategory = storedCategories.find(
-      (storedCategory: any) => storedCategory.id === dataCategory.id
+      (storedCategory) => storedCategory.id === dataCategory.id
     );
 
     return editedCategory ? editedCategory : dataCategory;
   });
 
   const newCategories = storedCategories.filter(
-    (storedCategory: any) =>
+    (storedCategory) =>
       !dataCategories.some(
-        (dataCategory: any) => dataCategory.id === storedCategory.id
+        (dataCategory) => dataCategory.id === storedCategory.id
       )
   );
 
   return [...mergedCategories, ...newCategories].filter(
-    (category: any) => !category.eliminado
+    (category) => !category.eliminado
   );
 }
