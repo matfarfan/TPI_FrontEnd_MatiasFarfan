@@ -2,6 +2,7 @@ import type { IUser } from "../../../types/IUser";
 import type { Rol } from "../../../types/Rol";
 import { USERS } from "../../../data/data";
 import { navigate } from "../../../utils/navigate";
+import { saveUser } from "../../../utils/localStorage";
 
 const form = document.getElementById("form") as HTMLFormElement;
 const inputEmail = document.getElementById("email") as HTMLInputElement;
@@ -10,6 +11,7 @@ const selectRol = document.getElementById("rol") as HTMLSelectElement;
 
 const userData = localStorage.getItem("userData");
 
+//Si ya existe una sesión activa, evita mostrar nuevamente el login.
 if (userData) {
   const user = JSON.parse(userData) as IUser;
 
@@ -62,7 +64,8 @@ form.addEventListener("submit", (e: SubmitEvent) => {
     loggedIn: true,
   };
 
-  localStorage.setItem("userData", JSON.stringify(user));
+  //Se guarda una sesión mínima para controlar accesos por rol.
+  saveUser(user);
 
   if (authenticatedUser.rol === "admin") {
     navigate("/src/pages/admin/home/home.html");
