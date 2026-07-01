@@ -1,14 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro | Food Store</title>
+    <link rel="stylesheet" href="../../../style.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+  <body class="login-page">
+    <main class="login-container">
+      <section class="login-card">
+        <div class="login-brand">
+          <h1>🍔 Food Store</h1>
+          <p>Creá tu cuenta para comprar en Food Store</p>
+        </div>
 
-<body>
-    <h1>Hola desde el registro</h1>
-</body>
+        <form id="register-form" class="login-form">
+          <div class="login-field">
+            <label for="name">Nombre</label>
+            <input
+              type="text"
+              id="name"
+              autocomplete="off"
+              placeholder="Matías"
+            />
+          </div>
 
+          <div class="login-field">
+            <label for="lastname">Apellido</label>
+            <input
+              type="text"
+              id="lastname"
+              autocomplete="off"
+              placeholder="Farfán"
+            />
+          </div>
+
+          <div class="login-field">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              autocomplete="off"
+              placeholder="cliente@email.com"
+            />
+          </div>
+
+          <div class="login-field">
+            <label for="password">Contraseña</label>
+            <input
+              type="password"
+              id="password"
+              autocomplete="off"
+              placeholder="********"
+            />
+          </div>
+
+          <button type="submit" class="login-button">Registrarme</button>
+
+          <p class="login-demo">
+            ¿Ya tenés cuenta?
+            <a href="../login/login.html">Iniciar sesión</a>
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <script type="module" src="./registro.ts"></script>
+  </body>
 </html>

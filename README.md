@@ -1,84 +1,94 @@
 # 🍔 Food Store
 
-## Trabajo Práctico Integrador - Programación III - TUP - UTN
+## Trabajo Práctico Integrador - Programación III
+### Tecnicatura Universitaria en Programación - UTN
 
-Food Store es una aplicación web desarrollada como Trabajo Práctico Integrador de la materia **Programación III**. El sistema simula la gestión de una tienda de comida rápida, permitiendo administrar productos, categorías y pedidos desde un panel de administración, además de brindar a los clientes la posibilidad de realizar compras y consultar sus pedidos.
+Food Store es una aplicación web desarrollada como Trabajo Práctico Integrador de la materia **Programación III**.
+
+El proyecto implementa un sistema completo de gestión de una tienda de comida rápida con dos perfiles de usuario (**Administrador** y **Cliente**), aplicando conceptos de TypeScript, modularización, control de acceso por roles, persistencia de datos y organización por componentes.
 
 ---
 
-# Tecnologías utilizadas
+# 🚀 Tecnologías utilizadas
 
 - HTML5
 - CSS3
 - TypeScript
+- JavaScript (generado a partir de TypeScript)
 - Vite
+- npm
 - LocalStorage
-- JSON como fuente de datos inicial
+- Archivos JSON como fuente de datos inicial
 
 ---
 
-# Funcionalidades
+# 📋 Funcionalidades
 
-## Administrador
+## 👨‍💼 Administrador
 
 - Inicio de sesión.
 - Dashboard con estadísticas generales.
-- Gestión de categorías.
+- Gestión completa de categorías.
   - Alta.
   - Modificación.
   - Baja lógica.
-- Gestión de productos.
+- Gestión completa de productos.
   - Alta.
   - Modificación.
   - Baja lógica.
 - Gestión de pedidos.
   - Visualización de todos los pedidos.
-  - Visualización del detalle.
-  - Cambio de estado del pedido.
+  - Consulta del detalle de cada pedido.
+  - Cambio de estado.
   - Cancelación de pedidos.
 - Cierre de sesión.
 
 ---
 
-## Cliente
+## 👤 Cliente
 
 - Registro de usuario.
 - Inicio de sesión.
-- Visualización de productos.
-- Filtro por categorías.
-- Detalle de producto.
+- Visualización del catálogo de productos.
+- Filtrado por categorías.
+- Consulta del detalle de cada producto.
 - Agregar productos al carrito.
 - Modificar cantidades.
 - Eliminar productos del carrito.
 - Confirmar compra.
-- Visualización del historial de pedidos.
-- Consulta del detalle de cada pedido.
+- Consultar historial de pedidos.
+- Visualizar el detalle de cada pedido.
 - Cierre de sesión.
 
 ---
 
-# Persistencia de datos
+# 💾 Persistencia de datos
 
-El proyecto utiliza **LocalStorage** para almacenar la información generada durante la utilización de la aplicación.
+El proyecto utiliza **LocalStorage** para almacenar toda la información generada durante el uso de la aplicación.
 
-Con el objetivo de mantener los datos iniciales del sistema y, al mismo tiempo, conservar las modificaciones realizadas por el usuario, se implementó una estrategia de integración entre los archivos JSON y el LocalStorage.
+Con el objetivo de conservar los datos iniciales del sistema y, al mismo tiempo, mantener las modificaciones realizadas por los usuarios, se implementó una estrategia de integración entre los archivos **JSON** y el **LocalStorage**.
 
 La aplicación funciona de la siguiente manera:
 
-- Los archivos JSON contienen los datos iniciales del sistema (productos, categorías, usuarios y pedidos).
-- El LocalStorage almacena todas las altas, modificaciones y bajas realizadas durante la ejecución.
-- Al cargar la aplicación, ambos orígenes de datos se unifican automáticamente.
+- Los archivos JSON contienen la información inicial del sistema (productos, categorías, usuarios y pedidos).
+- El LocalStorage almacena todas las altas, modificaciones y bajas realizadas durante la utilización de la aplicación.
+- Al iniciar la aplicación, ambos orígenes de datos se integran automáticamente.
 - Cuando existe información modificada en LocalStorage, ésta tiene prioridad sobre los datos originales del archivo JSON.
-- De esta forma se preservan los datos precargados del proyecto sin perder la persistencia de los cambios realizados por el usuario.
+- De esta forma se conservan los datos precargados del proyecto sin perder la persistencia de las modificaciones realizadas por el usuario.
 
 ---
 
-# Características implementadas
+# ⭐ Características implementadas
 
+- Arquitectura modular.
+- Tipado fuerte mediante TypeScript.
+- Separación de responsabilidades.
+- Interfaces y modelos tipados.
 - Persistencia mediante LocalStorage.
 - Datos iniciales cargados desde archivos JSON.
+- Integración automática entre JSON y LocalStorage.
 - Baja lógica de productos y categorías.
-- Actualización automática del Dashboard.
+- Dashboard con actualización automática de estadísticas.
 - Validaciones de formularios.
 - Control de acceso por roles.
 - Navegación independiente para administrador y cliente.
@@ -87,7 +97,7 @@ La aplicación funciona de la siguiente manera:
 
 ---
 
-# Estructura del proyecto
+# 📁 Estructura del proyecto
 
 ```text
 src/
@@ -122,12 +132,18 @@ src/
 
 ---
 
-# Instalación
+# ⚙️ Instalación
 
 Clonar el repositorio:
 
 ```bash
 git clone <url-del-repositorio>
+```
+
+Ingresar a la carpeta del proyecto:
+
+```bash
+cd Food-Store
 ```
 
 Instalar las dependencias:
@@ -138,52 +154,81 @@ npm install
 
 ---
 
-# Ejecutar el proyecto
+# ▶️ Scripts disponibles
+
+## Ejecutar en modo desarrollo
 
 ```bash
 npm run dev
 ```
 
+Inicia el servidor de desarrollo utilizando Vite.
+
 ---
 
-# Generar versión de producción
+## Generar versión de producción
 
 ```bash
 npm run build
 ```
 
+Compila el proyecto y genera la versión optimizada para producción.
+
 ---
 
-# Usuarios de prueba
+# 👥 Usuarios de prueba
 
 ## Administrador
 
-- Email: **admin@admin.com**
-- Contraseña: **123456**
+**Email**
 
-## Cliente
+```
+admin@admin.com
+```
 
-- Email: **cliente@food.com**
-- Contraseña: **cliente123**
+**Contraseña**
+
+```
+123456
+```
 
 ---
 
-# Autor
+## Cliente
+
+**Email**
+
+```
+cliente@food.com
+```
+
+**Contraseña**
+
+```
+cliente123
+```
+
+---
+
+# 👨‍💻 Autor
 
 - Matías Farfán
 
 ---
 
-# Video demostración y documentación
+# 🎥 Video demostración
 
+Se adjunta un video donde se muestra el funcionamiento completo de la aplicación.
 
+```
 https://drive.google.com/....
+```
 
 ---
 
-# Observaciones
+# 📝 Observaciones
 
 - La aplicación utiliza archivos JSON como fuente de datos inicial.
 - Todas las modificaciones realizadas durante la ejecución se almacenan en LocalStorage.
-- Para restaurar el estado inicial del sistema basta con limpiar el LocalStorage del navegador.
-- El proyecto fue desarrollado con fines académicos como Trabajo Práctico Integrador de Programación III.
+- Para restaurar el estado inicial del sistema únicamente es necesario limpiar el LocalStorage del navegador.
+- El proyecto fue desarrollado como Trabajo Práctico Integrador de la materia **Programación III** de la **Tecnicatura Universitaria en Programación (UTN)**.

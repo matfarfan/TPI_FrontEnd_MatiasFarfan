@@ -4,6 +4,15 @@ import { USERS } from "../../../data/data";
 import { navigate } from "../../../utils/navigate";
 import { saveUser } from "../../../utils/localStorage";
 
+interface AuthUser {
+  id: number;
+  nombre: string;
+  apellido?: string;
+  mail: string;
+  password: string;
+  rol: Rol;
+}
+
 const form = document.getElementById("form") as HTMLFormElement;
 const inputEmail = document.getElementById("email") as HTMLInputElement;
 const inputPassword = document.getElementById("password") as HTMLInputElement;
@@ -11,7 +20,6 @@ const selectRol = document.getElementById("rol") as HTMLSelectElement;
 
 const userData = localStorage.getItem("userData");
 
-//Si ya existe una sesión activa, evita mostrar nuevamente el login.
 if (userData) {
   const user = JSON.parse(userData) as IUser;
 
@@ -23,6 +31,16 @@ if (userData) {
     navigate("/src/pages/store/home/home.html");
   }
 }
+
+const getRegisteredUsers = (): AuthUser[] => {
+  const users = localStorage.getItem("registeredUsers");
+
+  if (!users) {
+    return [];
+  }
+
+  return JSON.parse(users) as AuthUser[];
+};
 
 form.addEventListener("submit", (e: SubmitEvent) => {
   e.preventDefault();
@@ -46,7 +64,10 @@ form.addEventListener("submit", (e: SubmitEvent) => {
     return;
   }
 
-  const authenticatedUser = USERS.find(
+  const registeredUsers = getRegisteredUsers();
+  const allUsers: AuthUser[] = [...USERS, ...registeredUsers];
+
+  const authenticatedUser = allUsers.find(
     (user) =>
       user.mail === valueEmail &&
       user.password === valuePassword &&
@@ -64,12 +85,11 @@ form.addEventListener("submit", (e: SubmitEvent) => {
     loggedIn: true,
   };
 
-  //Se guarda una sesión mínima para controlar accesos por rol.
   saveUser(user);
 
   if (authenticatedUser.rol === "admin") {
     navigate("/src/pages/admin/home/home.html");
-  } else if (authenticatedUser.rol === "client") {
+  } else {
     navigate("/src/pages/store/home/home.html");
   }
 });
