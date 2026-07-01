@@ -1,6 +1,6 @@
 import { PEDIDOS, PRODUCTS } from "../../../data/data";
 import type { Order, OrderDetail } from "../../../types/orders";
-import { logout, checkAuhtUser } from "../../../utils/auth";
+import { logout, checkAuthUser } from "../../../utils/auth";
 
 const statusModal = document.getElementById("status-modal");
 const closeStatusModal = document.getElementById("close-status-modal");
@@ -33,7 +33,7 @@ orderDetailModal?.addEventListener("click", (event) => {
   }
 });
 
-checkAuhtUser(
+checkAuthUser(
   "/src/pages/auth/login/login.html",
   "/src/pages/admin/orders/orders.html",
   "admin"

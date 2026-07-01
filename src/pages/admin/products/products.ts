@@ -1,5 +1,5 @@
 import { PRODUCTS, getCategories } from "../../../data/data";
-import { logout, checkAuhtUser } from "../../../utils/auth";
+import { logout, checkAuthUser } from "../../../utils/auth";
 
 const productsContainer = document.getElementById("products-container");
 const buttonLogout = document.getElementById("logoutButton") as HTMLButtonElement;
@@ -165,7 +165,7 @@ productForm?.addEventListener("submit", (event) => {
   location.reload();
 });
 
-checkAuhtUser(
+checkAuthUser(
   "/src/pages/auth/login/login.html",
   "/src/pages/admin/products/products.html",
   "admin"

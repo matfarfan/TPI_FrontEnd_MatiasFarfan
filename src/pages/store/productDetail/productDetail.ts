@@ -10,19 +10,22 @@ const productId = Number(params.get("id"));
 
 const cartCount = document.getElementById("cart-count");
 
-const product: Product | undefined = PRODUCTS.find(
+const product = PRODUCTS.find(
   (item: Product) => item.id === productId && !item.eliminado
 );
 
 function getCart(): CartItem[] {
   const cart = localStorage.getItem("cart");
-  return cart ? JSON.parse(cart) : [];
+  return cart ? (JSON.parse(cart) as CartItem[]) : [];
 }
 
 function saveCart(cart: CartItem[]): void {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+/**
+ * Agrega el producto seleccionado al carrito respetando la cantidad elegida.
+ */
 function addToCart(product: Product, cantidad: number): void {
   const cart = getCart();
   const itemExistente = cart.find((item) => item.id === product.id);
@@ -39,7 +42,9 @@ function addToCart(product: Product, cantidad: number): void {
 }
 
 function renderProductDetail(): void {
-  if (!container) return;
+  if (!container) {
+    return;
+  }
 
   if (!product) {
     container.innerHTML = `
@@ -110,20 +115,29 @@ function renderProductDetail(): void {
   btnAddCart?.addEventListener("click", () => {
     const cantidad = Number(inputCantidad?.value);
 
-    if (!productoDisponible) return alert("Este producto no está disponible");
-    if (cantidad <= 0) return alert("La cantidad debe ser mayor a cero");
-    if (cantidad > product.stock) return alert("La cantidad no puede superar el stock disponible");
+    if (!productoDisponible) {
+      alert("Este producto no está disponible");
+      return;
+    }
+
+    if (cantidad <= 0) {
+      alert("La cantidad debe ser mayor a cero");
+      return;
+    }
+
+    if (cantidad > product.stock) {
+      alert("La cantidad no puede superar el stock disponible");
+      return;
+    }
 
     addToCart(product, cantidad);
   });
 }
 
-renderProductDetail();
-
-updateCartCount();
-
 function updateCartCount(): void {
-  if (!cartCount) return;
+  if (!cartCount) {
+    return;
+  }
 
   const cart = getCart();
 
@@ -131,3 +145,6 @@ function updateCartCount(): void {
 
   cartCount.textContent = String(totalItems);
 }
+
+renderProductDetail();
+updateCartCount();

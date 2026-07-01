@@ -1,5 +1,5 @@
 import { getCategories } from "../../../data/data";
-import { logout, checkAuhtUser } from "../../../utils/auth";
+import { logout, checkAuthUser } from "../../../utils/auth";
 
 const categoriesContainer = document.getElementById("categories-container");
 const buttonLogout = document.getElementById("logoutButton") as HTMLButtonElement;
@@ -136,7 +136,7 @@ categoryForm?.addEventListener("submit", (event) => {
   location.reload();
 });
 
-checkAuhtUser(
+checkAuthUser(
   "/src/pages/auth/login/login.html",
   "/src/pages/admin/categories/categories.html",
   "admin"

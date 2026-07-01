@@ -1,6 +1,7 @@
 import { PRODUCTS } from "../../../data/data";
 import type { IUser } from "../../../types/IUser";
 import type { IPedido } from "../../../types/IPedido";
+import type { CartItem } from "../../../types/product";
 import { getPedidosByUser } from "../../../utils/pedidoService";
 import { logout } from "../../../utils/auth";
 
@@ -28,7 +29,7 @@ if (!userData) {
   alert("Debe iniciar sesión para ver sus pedidos.");
   window.location.href = "/src/pages/auth/login/login.html";
 } else {
-  const user: IUser = JSON.parse(userData);
+  const user = JSON.parse(userData) as IUser;
   const pedidos = getPedidosByUser(user.email);
 
   renderPedidos(pedidos);
@@ -57,8 +58,13 @@ function formatDate(date: string): string {
   return `${formattedDate} • ${formattedTime}`;
 }
 
+/**
+ * Muestra los pedidos del usuario autenticado ordenados desde el más reciente.
+ */
 function renderPedidos(pedidos: IPedido[]): void {
-  if (!ordersContainer) return;
+  if (!ordersContainer) {
+    return;
+  }
 
   ordersContainer.innerHTML = "";
 
@@ -131,10 +137,15 @@ function renderPedidos(pedidos: IPedido[]): void {
   });
 }
 
+/**
+ * Abre el modal con el detalle completo de un pedido seleccionado.
+ */
 function openDetallePedido(pedidoId: number, pedidos: IPedido[]): void {
   const pedido = pedidos.find((p) => p.id === pedidoId);
 
-  if (!pedido || !orderModal || !orderModalBody) return;
+  if (!pedido || !orderModal || !orderModalBody) {
+    return;
+  }
 
   const subtotal = pedido.detalles.reduce(
     (acc, detalle) => acc + detalle.subtotal,
@@ -199,36 +210,48 @@ function openDetallePedido(pedidoId: number, pedidos: IPedido[]): void {
 }
 
 function getEstadoTexto(estado: IPedido["estado"]): string {
-  const estados = {
+  const estados: Partial<Record<IPedido["estado"], string>> = {
     pending: "Pendiente",
     processing: "En preparación",
     completed: "Entregado",
     cancelled: "Cancelado",
+    PENDIENTE: "Pendiente",
+    EN_PREPARACION: "En preparación",
+    ENTREGADO: "Entregado",
+    CANCELADO: "Cancelado",
   };
 
-  return estados[estado];
+  return estados[estado] ?? "Estado desconocido";
 }
 
 function getEstadoClase(estado: IPedido["estado"]): string {
-  const clases = {
+  const clases: Partial<Record<IPedido["estado"], string>> = {
     pending: "status-pending",
     processing: "status-processing",
     completed: "status-completed",
     cancelled: "status-cancelled",
+    PENDIENTE: "status-pending",
+    EN_PREPARACION: "status-processing",
+    ENTREGADO: "status-completed",
+    CANCELADO: "status-cancelled",
   };
 
-  return clases[estado];
+  return clases[estado] ?? "status-pending";
 }
 
 function getMensajeEstado(estado: IPedido["estado"]): string {
-  const mensajes = {
+  const mensajes: Partial<Record<IPedido["estado"], string>> = {
     pending: "⏳ Tu pedido está pendiente de confirmación.",
     processing: "🍳 Tu pedido está siendo preparado.",
     completed: "✅ Tu pedido fue entregado correctamente.",
     cancelled: "❌ Tu pedido fue cancelado.",
+    PENDIENTE: "⏳ Tu pedido está pendiente de confirmación.",
+    EN_PREPARACION: "🍳 Tu pedido está siendo preparado.",
+    ENTREGADO: "✅ Tu pedido fue entregado correctamente.",
+    CANCELADO: "❌ Tu pedido fue cancelado.",
   };
 
-  return mensajes[estado];
+  return mensajes[estado] ?? "⏳ Tu pedido está pendiente de confirmación.";
 }
 
 closeOrderModal?.addEventListener("click", () => {
@@ -241,13 +264,15 @@ orderModal?.addEventListener("click", (event) => {
   }
 });
 
-function getCart(): { id: number; cantidad: number }[] {
+function getCart(): CartItem[] {
   const storedCart = localStorage.getItem("cart");
-  return storedCart ? JSON.parse(storedCart) : [];
+  return storedCart ? (JSON.parse(storedCart) as CartItem[]) : [];
 }
 
 function updateCartCount(): void {
-  if (!cartCount) return;
+  if (!cartCount) {
+    return;
+  }
 
   const cart = getCart();
 

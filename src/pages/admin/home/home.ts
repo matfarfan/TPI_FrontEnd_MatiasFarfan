@@ -1,4 +1,4 @@
-import { checkAuhtUser, logout } from "../../../utils/auth";
+import { checkAuthUser, logout } from "../../../utils/auth";
 import { PRODUCTS, getCategories } from "../../../data/data";
 import { getAllOrders } from "../../../utils/pedidoService";
 
@@ -14,7 +14,7 @@ buttonLogout?.addEventListener("click", () => {
 
 const initPage = () => {
   console.log("inicio de pagina");
-  checkAuhtUser(
+  checkAuthUser(
     "/src/pages/auth/login/login.html",
     "/src/pages/admin/home/home.html",
     "admin"

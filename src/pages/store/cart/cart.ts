@@ -25,7 +25,7 @@ const cart: CartItem[] = getCart();
 
 function getCart(): CartItem[] {
   const storedCart = localStorage.getItem("cart");
-  return storedCart ? JSON.parse(storedCart) : [];
+  return storedCart ? (JSON.parse(storedCart) as CartItem[]) : [];
 }
 
 function saveCart(updatedCart: CartItem[]): void {
@@ -47,14 +47,18 @@ function getCartTotal(): number {
   return cart.reduce((total, cartItem) => {
     const product = getProductById(cartItem.id);
 
-    if (!product) return total;
+    if (!product) {
+      return total;
+    }
 
     return total + product.precio * cartItem.cantidad;
   }, 0);
 }
 
 function renderCart(): void {
-  if (!cartContainer || !totalContainer) return;
+  if (!cartContainer || !totalContainer) {
+    return;
+  }
 
   cartContainer.innerHTML = "";
 
@@ -76,7 +80,9 @@ function renderCart(): void {
   cart.forEach((cartItem) => {
     const product = getProductById(cartItem.id);
 
-    if (!product) return;
+    if (!product) {
+      return;
+    }
 
     const subtotal = product.precio * cartItem.cantidad;
 
@@ -121,7 +127,9 @@ function renderCart(): void {
 function increaseQuantity(id: number): void {
   const product = getProductById(id);
 
-  if (!product) return;
+  if (!product) {
+    return;
+  }
 
   const updatedCart = cart.map((item) => {
     if (item.id === id) {
@@ -169,6 +177,9 @@ function clearCart(): void {
   location.reload();
 }
 
+/**
+ * Genera un pedido a partir del carrito actual y lo guarda en LocalStorage.
+ */
 function confirmOrder(): void {
   if (cart.length === 0) {
     alert("El carrito está vacío. No se puede confirmar la compra.");
@@ -183,7 +194,7 @@ function confirmOrder(): void {
     return;
   }
 
-  const user: IUser = JSON.parse(userData);
+  const user = JSON.parse(userData) as IUser;
 
   const detalles = cart.map((cartItem) => {
     const product = getProductById(cartItem.id);
@@ -234,7 +245,9 @@ cartContainer?.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
   const id = Number(target.dataset.id);
 
-  if (!id) return;
+  if (!id) {
+    return;
+  }
 
   if (target.classList.contains("increase")) {
     increaseQuantity(id);
@@ -250,28 +263,30 @@ cartContainer?.addEventListener("click", (event) => {
 });
 
 function updateCartCount(): void {
-  if (!cartCount) return;
+  if (!cartCount) {
+    return;
+  }
 
   const totalItems = cart.reduce((total, item) => total + item.cantidad, 0);
 
   cartCount.textContent = String(totalItems);
 }
 
-clearCartButton?.addEventListener("click", clearCart);
-confirmOrderButton?.addEventListener("click", confirmOrder);
-
-renderCart();
-updateCartCount();
-
+/**
+ * Actualiza el stock persistido para que el panel administrador
+ * y el catálogo del cliente reflejen la compra realizada.
+ */
 function updateProductsStock(): void {
   const storedProducts = localStorage.getItem("adminProducts");
-  const adminProducts = storedProducts ? JSON.parse(storedProducts) : [];
+  const adminProducts = storedProducts
+    ? (JSON.parse(storedProducts) as Product[])
+    : [];
 
   const updatedProducts = PRODUCTS.map((product) => {
     const cartItem = cart.find((item) => item.id === product.id);
 
     const storedProduct = adminProducts.find(
-      (adminProduct: any) => adminProduct.id === product.id
+      (adminProduct) => adminProduct.id === product.id
     );
 
     const baseProduct = storedProduct ? storedProduct : product;
@@ -290,7 +305,7 @@ function updateProductsStock(): void {
   });
 
   const newAdminProducts = adminProducts.filter(
-    (adminProduct: any) =>
+    (adminProduct) =>
       !PRODUCTS.some((product) => product.id === adminProduct.id)
   );
 
@@ -299,3 +314,9 @@ function updateProductsStock(): void {
     JSON.stringify([...updatedProducts, ...newAdminProducts])
   );
 }
+
+clearCartButton?.addEventListener("click", clearCart);
+confirmOrderButton?.addEventListener("click", confirmOrder);
+
+renderCart();
+updateCartCount();
