@@ -1,0 +1,1 @@
+export type EstadoPedido = "pending" | "processing" | "completed" | "cancelled";

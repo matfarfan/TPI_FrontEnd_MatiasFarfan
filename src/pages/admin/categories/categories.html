@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Categorías</title>
+
+    <link rel="stylesheet" href="../../../style.css">
+</head>
+
+<body class="admin-page">
+
+    <aside class="admin-sidebar">
+
+        <h2>Food Store</h2>
+
+        <nav>
+
+            <a href="../home/home.html">Dashboard</a>
+
+            <a class="active" href="./categories.html">
+                Categorías
+            </a>
+
+            <a href="../products/products.html">Productos</a>
+
+            <a href="../orders/orders.html">
+                Pedidos
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <header class="admin-header">
+
+            <h1>Gestión de Categorías</h1>
+
+            <button id="logoutButton">
+                Cerrar sesión
+            </button>
+
+        </header>
+
+        <section class="table-header">
+
+            <h2>Listado de categorías</h2>
+
+            <button id="new-category">
+                + Nueva categoría
+            </button>
+
+        </section>
+
+        <section id="categories-container">
+
+        </section>
+
+        <div id="category-modal" class="admin-modal hidden">
+            <div class="admin-modal-content">
+
+                <button id="close-category-modal" class="modal-close">
+                    ✕
+                </button>
+
+                <h2 id="category-modal-title">Nueva categoría</h2>
+
+                <form id="category-form">
+                    <input type="hidden" id="category-id" />
+                    
+                    <label for="category-name">Nombre</label>
+                    <input type="text" id="category-name" required>
+
+                    <label for="category-description">Descripción</label>
+                    <textarea id="category-description" required></textarea>
+
+                    <button type="submit">
+                        Guardar categoría
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script type="module" src="./categories.ts"></script>
+
+</body>
+
+</html>

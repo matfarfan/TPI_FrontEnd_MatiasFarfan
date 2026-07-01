@@ -1,0 +1,96 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="../../../style.css">
+</head>
+
+<body class="admin-page">
+    <aside class="admin-sidebar">
+        <h2>Food Store</h2>
+        <nav>
+            <a href="./home.html" class="active">
+                Dashboard
+            </a>
+
+            <a href="../categories/categories.html">
+                Categorías
+            </a>
+
+            <a href="../products/products.html">
+                Productos                
+            </a>
+
+            <a href="../orders/orders.html">
+                Pedidos
+            </a>
+        </nav>
+    </aside>
+
+    <main class="admin-content">
+        <header class="admin-header">
+            <h1>Dashboard</h1>
+            <button id="logoutButton">
+                Cerrar sesión
+            </button>
+        </header>
+
+        <section id="dashboard-content">
+            <div class="dashboard-cards">
+
+                <div class="dashboard-card">
+                    <h3>Categorías</h3>
+                    <p id="total-categories">0</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Productos</h3>
+                    <p id="total-products">0</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Pedidos</h3>
+                    <p id="total-orders">0</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Disponibles</h3>
+                    <p id="available-products">0</p>
+                </div>
+
+            </div>
+
+            <section class="dashboard-summary">
+                <h2>Resumen rápido</h2>
+
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <h4>Ingresos totales</h4>
+                        <p id="total-income">$0</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <h4>Pedidos pendientes</h4>
+                        <p id="pending-orders">0</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <h4>En preparación</h4>
+                        <p id="processing-orders">0</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <h4>Completados</h4>
+                        <p id="completed-orders">0</p>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+
+    </main>
+
+    <script type="module" src="./home.ts"></script>
+
+</body>

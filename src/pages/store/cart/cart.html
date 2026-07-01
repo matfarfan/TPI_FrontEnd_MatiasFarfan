@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito | Food Store</title>
+    <link rel="stylesheet" href="../../../style.css" />
+  </head>
+
+  <body>
+    <header class="store-sticky-header">
+      <div class="store-header">
+        <div>
+          <h1>🍔 Food Store</h1>
+          <p>Fast Food & Delivery</p>
+        </div>
+
+        <nav class="store-nav">
+          <a href="../home/home.html">Inicio</a>
+          <a href="../../client/orders/orders.html">Mis pedidos</a>
+          <a href="./cart.html" class="active">Carrito <span id="cart-count">0</span></a>
+          <button class="store-logout">Cerrar sesión</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="cart-page">
+      <section class="cart-header">
+        <span class="cart-badge">
+          🛒 Carrito
+        </span>
+
+        <h2>Tu pedido</h2>
+
+        <p>
+          Revisá los productos seleccionados antes de confirmar tu compra.
+        </p>
+      </section>
+
+      <section class="cart-layout">
+        <div id="cart-container" class="cart-products"></div>
+
+        <aside class="cart-summary">
+          <h2>Resumen</h2>
+
+          <div class="cart-total-box">
+            <span>Total a pagar</span>
+            <div id="cart-total" class="cart-total"></div>
+          </div>
+
+          <button id="confirm-order" class="confirm-order-button">
+            Confirmar compra
+          </button>
+
+          <button id="clear-cart" class="clear-cart-button">
+            Vaciar carrito
+          </button>
+
+          <a href="../home/home.html" class="back-to-catalog-button">
+            ← Seguir comprando
+          </a>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="./cart.ts"></script>
+  </body>
+</html>

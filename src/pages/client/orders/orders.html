@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis pedidos | Food Store</title>
+    <link rel="stylesheet" href="../../../style.css" />
+  </head>
+
+  <body>
+    <header class="store-sticky-header">
+      <div class="store-header">
+        <div>
+          <h1>🍔 Food Store</h1>
+          <p>Fast Food & Delivery</p>
+        </div>
+
+        <nav class="store-nav">
+          <a href="../../store/home/home.html">Inicio</a>
+
+          <a href="./orders.html" class="active">
+            Mis pedidos
+          </a>
+
+          <a href="../../store/cart/cart.html">
+            Carrito <span id="cart-count">0</span>
+          </a>
+
+          <button class="store-logout">
+            Cerrar sesión
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="client-orders-page">
+      <section class="orders-header">
+        <span class="orders-badge">📦 Pedidos</span>
+
+        <h2>Mis pedidos</h2>
+
+        <p>
+          Consultá el estado de tus compras y revisá el detalle de cada pedido.
+        </p>
+      </section>
+
+      <section id="orders-container" class="orders-container"></section>
+    </main>
+
+    <div id="order-modal" class="order-modal hidden">
+      <div class="order-modal-content">
+        <button id="close-order-modal" class="modal-close">✕</button>
+        <div id="order-modal-body"></div>
+      </div>
+    </div>
+
+    <script type="module" src="./orders.ts"></script>
+  </body>
+</html>

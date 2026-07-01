@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Store</title>
+  <!-- conecta el archivo CSS -->
+  <link rel="stylesheet" href="../../../style.css">
+</head>
+  <body class="store-page">
+
+    <section class="store-sticky-header">
+
+      <header class="store-header">
+
+        <div class="store-brand">
+
+          <h1>🍔 Food Store</h1>
+
+          <span>Fast Food & Delivery</span>
+
+        </div>
+
+        <nav class="store-nav">
+
+          <a href="../home/home.html" class="active">
+            Inicio
+          </a>
+
+          <a href="../../client/orders/orders.html">
+            Mis pedidos
+          </a>
+
+          <a href="../cart/cart.html">
+            Carrito
+            <span id="cart-count" class="cart-count">0</span>
+          </a>
+
+          <a href="#" id="logoutButton">
+            Cerrar sesión
+          </a>
+
+        </nav>
+
+      </header>
+
+      <section class="store-filters">
+
+        <input
+          type="text"
+          id="search"
+          placeholder="Buscar producto..."
+        />
+
+        <select id="sort-products">
+          <option value="DEFAULT">Ordenar por</option>
+          <option value="NAME_ASC">Nombre A-Z</option>
+          <option value="NAME_DESC">Nombre Z-A</option>
+          <option value="PRICE_ASC">Precio menor a mayor</option>
+          <option value="PRICE_DESC">Precio mayor a menor</option>
+        </select>
+
+      </section>
+
+      <section class="category-section">
+
+        <div class="category-title">
+          <strong>Categorías</strong>
+          <span>Filtrar por categoría</span>
+        </div>
+
+        <div id="categories" class="category-filter"></div>
+
+      </section>
+
+    </section>
+
+    <section class="products-header">
+      <h2>Todos los productos</h2>
+      <p id="products-count" class="products-count"></p>
+    </section>
+
+    <div id="products"></div>
+
+    <div id="cart-toast" class="cart-toast">
+      Producto agregado al carrito
+    </div>
+
+    <script type="module" src="./home.ts"></script>
+
+  </body>
+</html>
