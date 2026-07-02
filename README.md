@@ -216,13 +216,14 @@ cliente123
 
 ---
 
-# 🎥 Video demostración
+# 🎥 Video demostración y repositorio
+
+https://github.com/matfarfan/TPI_FrontEnd_MatiasFarfan.git
 
 Se adjunta un video donde se muestra el funcionamiento completo de la aplicación.
 
-```
-https://drive.google.com/....
-```
+https://drive.google.com/file/d/1Ha7yOmRN-RI2NWJUU1acY0nrJqXd49Mh/view?usp=sharing
+
 
 ---
 
